@@ -10,12 +10,12 @@ spec:
     - /run.sh
     resources:
       requests:
-        cpu: 0.5
-        memory: 300M
-      limits:
         cpu: 0.1
         memory: 100M
-    image: anderssv/openshift-cassandra-image:latest
+      limits:
+        cpu: 0.5
+        memory: 300M
+    image: anderssv/openshift-cassandra:latest
     name: cassandra
     ports:
     - name: cql

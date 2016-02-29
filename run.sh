@@ -18,8 +18,6 @@ project_name=$(oc project -q)
 
 echo "Running in project ${project_name}"
 
-find -type f -name "*.yaml" -exec sed -i "s|gcr.io/google_containers/cassandra:v6|anderssv/openshift-cassandra-image:latest|g" {} \;
-
 oc policy add-role-to-user view system:serviceaccount:${project_name}:default
 
 oc create -f ./cassandra-service.yaml
