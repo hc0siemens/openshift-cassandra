@@ -9,8 +9,8 @@ echo "Running in project ${project_name}"
 
 oc policy add-role-to-user view system:serviceaccount:${project_name}:default
 
-oc create -f ./cassandra-service.yaml
-oc create -f ./cassandra-controller.yaml
+oc create -f ./persistent-volume/cassandra-service.yaml
+oc create -f ./persistent-volume/cassandra-controller.yaml
 
 echo "Done!"
 echo "Nodes are now launching..."
