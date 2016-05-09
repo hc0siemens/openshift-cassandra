@@ -1,28 +1,21 @@
-apiVersion: v1
-kind: ReplicationController
+apiVersion: extensions/v1beta1
+kind: DaemonSet
 metadata:
+  labels:
+    name: cassandra
   name: cassandra
-  # The labels will be applied automatically
-  # from the labels in the pod template, if not set
-  # labels:
-    # app: cassandra
 spec:
-  replicas: 2
-  # The selector will be applied automatically
-  # from the labels in the pod template, if not set.
-  # selector:
-      # app: cassandra
   template:
     metadata:
       labels:
         app: cassandra
     spec:
+      # Filter to specific nodes:
+      # nodeSelector:
+      #  app: cassandra
       containers:
         - command:
             - /run.sh
-          resources:
-            limits:
-              cpu: 0.1
           env:
             - name: MAX_HEAP_SIZE
               value: 512M
@@ -39,6 +32,9 @@ spec:
               name: cql
             - containerPort: 9160
               name: thrift
+          resources:
+            request:
+              cpu: 0.1
           volumeMounts:
             - mountPath: /cassandra_data
               name: data
