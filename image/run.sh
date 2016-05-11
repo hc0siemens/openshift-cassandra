@@ -21,13 +21,9 @@ export BOOT_LOG=/cassandra_data/boot.log # Does not show up at stdout???
 
 echo "Starting Cassandra node" > $BOOT_LOG
 echo "--------------------------------------------------" >> $BOOT_LOG
-echo $(ls -la /cassandra_data) >> $BOOT_LOG
+ls -la /cassandra_data >> $BOOT_LOG
 echo "--------------------------------------------------" >> $BOOT_LOG
-echo $(ls -la /cassandra_data/data) >> $BOOT_LOG
+ls -la /cassandra_data/data >> $BOOT_LOG
 echo "--------------------------------------------------" >> $BOOT_LOG
 
-cassandra -f
-
-echo $(whoami)
-echo "Sleeping"
-sleep 30 # Hack to keep container around after failure
+cassandra -f | tee -a $BOOT_LOG
