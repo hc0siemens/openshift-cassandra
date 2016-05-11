@@ -44,8 +44,8 @@ RUN chmod a+rx /run.sh && \
       chown -R cassandra.cassandra /etc/cassandra /cassandra_data && \
       chmod o+w -R /etc/cassandra /cassandra_data
 
-VOLUME ["/cassandra_data/data"]    
+VOLUME ["/cassandra_data"]    
 
 USER cassandra
 
-CMD /run.sh
+CMD /run.sh | tee -a /cassandra_data/run.log
