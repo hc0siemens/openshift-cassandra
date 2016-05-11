@@ -40,8 +40,4 @@ COPY cassandra.yaml /etc/cassandra/cassandra.yaml
 COPY logback.xml /etc/cassandra/logback.xml
 COPY kubernetes-cassandra.jar /kubernetes-cassandra.jar
 
-VOLUME ["/cassandra_data/data"]    
-
-USER cassandra
-
 CMD [ "/run.sh", "|", "tee", "-a", "/cassandra_data/run.log" ]
