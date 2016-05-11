@@ -18,7 +18,7 @@ perl -pi -e "s/%%ip%%/$(hostname -I)/g" /etc/cassandra/cassandra.yaml
 export CLASSPATH=/kubernetes-cassandra.jar
 
 
-echo "Starting Cassandra node"
+echo "Starting Cassandra node $(date)"
 echo "--------------------------------------------------"
 ls -la /cassandra_data
 echo "--------------------------------------------------"
