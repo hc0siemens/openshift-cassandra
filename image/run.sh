@@ -27,3 +27,7 @@ echo $(ls -la /cassandra_data/data) >> $BOOT_LOG
 echo "--------------------------------------------------" >> $BOOT_LOG
 
 cassandra -f
+
+echo $(whoami)
+echo "Sleeping"
+sleep 30 # Hack to keep container around after failure

@@ -52,7 +52,7 @@ items:
                 valueFrom:
                   fieldRef:
                     fieldPath: status.podIP
-            image: gcr.io/google-samples/cassandra:v8
+            image: anderssv/openshift-cassandra
             name: cassandra
             ports:
               - containerPort: 9042
