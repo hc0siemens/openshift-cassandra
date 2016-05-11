@@ -24,11 +24,12 @@ RUN gpg --keyserver pgp.mit.edu --recv-keys F758CE318D77295D && \
   gpg --keyserver pgp.mit.edu --recv-keys 0353B12C && \
   gpg --export --armor 0353B12C | apt-key add - && \
   apt-get update && \
-  apt-get -qq -y install procps  cassandra openjdk-8-jre-headless && \
+  apt-get -qq -y install procps cassandra openjdk-8-jre-headless && \
   chmod a+rx /run.sh && \
   mkdir -p /cassandra_data/data && \
   chown -R cassandra.cassandra /etc/cassandra /cassandra_data && \
   chmod o+w -R /etc/cassandra /cassandra_data && \
+  mkdir -p /var/lib/cassandra && chmod o+rwx /var/lib/cassandra && \ 
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /usr/share/doc/ && \
   rm -rf /usr/share/doc-base/ && \
