@@ -28,7 +28,7 @@ RUN gpg --keyserver pgp.mit.edu --recv-keys F758CE318D77295D && \
   chmod a+rx /run.sh && \
   mkdir -p /cassandra_data/data && \
   chown -R cassandra.cassandra /etc/cassandra /cassandra_data && \
-  chmod o+w -R /etc/cassandra /cassandra_data && \
+  chmod o+w -R /etc/cassandra /cassandra_data /cassandra_data/data && \
   mkdir -p /var/lib/cassandra && chmod o+rwx /var/lib/cassandra && \ 
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /usr/share/doc/ && \
@@ -39,11 +39,6 @@ RUN gpg --keyserver pgp.mit.edu --recv-keys F758CE318D77295D && \
 COPY cassandra.yaml /etc/cassandra/cassandra.yaml
 COPY logback.xml /etc/cassandra/logback.xml
 COPY kubernetes-cassandra.jar /kubernetes-cassandra.jar
-
-RUN chmod a+rx /run.sh && \
-      mkdir -p /cassandra_data/data && \
-      chown -R cassandra.cassandra /etc/cassandra /cassandra_data && \
-      chmod o+w -R /etc/cassandra /cassandra_data
 
 VOLUME ["/cassandra_data/data"]    
 
