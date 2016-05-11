@@ -16,12 +16,14 @@
 
 perl -pi -e "s/%%ip%%/$(hostname -I)/g" /etc/cassandra/cassandra.yaml
 export CLASSPATH=/kubernetes-cassandra.jar
+export BOOT_LOG=/cassandra_data/boot.log # Does not show up at stdout???
 
-echo "Starting Cassandra node"
-echo "--------------------------------------------------"
-echo $(ls -la /cassandra_data)
-echo "--------------------------------------------------"
-echo $(ls -la /cassandra_data/data)
-echo "--------------------------------------------------"
+
+echo "Starting Cassandra node" > $BOOT_LOG
+echo "--------------------------------------------------" >> $BOOT_LOG
+echo $(ls -la /cassandra_data) >> $BOOT_LOG
+echo "--------------------------------------------------" >> $BOOT_LOG
+echo $(ls -la /cassandra_data/data) >> $BOOT_LOG
+echo "--------------------------------------------------" >> $BOOT_LOG
 
 cassandra -f
