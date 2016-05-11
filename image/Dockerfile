@@ -48,4 +48,4 @@ VOLUME ["/cassandra_data"]
 
 USER cassandra
 
-CMD /run.sh | tee -a /cassandra_data/run.log
+CMD [ "/run.sh", "|", "tee", "-a", "/cassandra_data/run.log" ]
