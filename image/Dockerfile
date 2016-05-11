@@ -27,6 +27,7 @@ RUN gpg --keyserver pgp.mit.edu --recv-keys F758CE318D77295D && \
   apt-get -qq -y install procps cassandra openjdk-8-jre-headless
 
 RUN chmod a+rx /run.sh && \
+  mkdir -p /etc/cassandra && mkdir -p /cassandra_data && \
   chown -R cassandra.cassandra /etc/cassandra /cassandra_data && \
   chmod o+w -R /etc/cassandra /cassandra_data && \
   mkdir -p /var/lib/cassandra && chmod o+rwx /var/lib/cassandra && \ 
