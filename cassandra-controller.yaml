@@ -32,6 +32,10 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
           image: anderssv/openshift-cassandra
           name: cassandra
           ports:
@@ -41,7 +45,7 @@ spec:
               name: thrift
           volumeMounts:
             - mountPath: /cassandra_data
-              name: data
+              name: cassandra-data
       volumes:
-        - name: data
+        - name: cassandra-data
           emptyDir: {}
