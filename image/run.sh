@@ -21,11 +21,4 @@ mkdir -p /cassandra_data/data
 mkdir -p /cassandra_data/commitlog
 mkdir -p /cassandra_data/saved_caches
 
-echo "Starting Cassandra node $(date)"
-echo "--------------------------------------------------"
-ls -la /cassandra_data
-echo "--------------------------------------------------"
-ls -la /cassandra_data/data
-echo "--------------------------------------------------"
-
 cassandra -f -R
