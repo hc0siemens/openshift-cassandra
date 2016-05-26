@@ -32,7 +32,14 @@ Running the test:
     oc exec \
         -t $(oc get -l 'run=cassandra-stress' -o jsonpath='{@.items[0].metadata.name}' pods) \
         -- cassandra-stress write -rate threads\>\=500 \
-            -node $(oc get -o jsonpath='{@.items[0].status.podIP}' pods)
+            -node $(oc get -o jsonpath='{@.items[0].status.podIP}' pods) \
+            -graph file=/tmp/openshift-benchmark.html title=Openshift revision=benchmark-0
+
+This will display stats but also generate a HTML report. To extract the report from the pod you can do:
+
+    mkdir -p /tmp/openshift-cassandra-report \
+    && oc rsync \
+        $(oc get -l 'run=cassandra-stress' -o jsonpath='{@.items[0].metadata.name}' pods):/tmp /tmp/openshift-cassandra-report
 
 Make sure to check which node the cassandra-stress pod is running on, and that it is different from the nodes you are testing. :)
 
