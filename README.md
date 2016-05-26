@@ -14,23 +14,27 @@ This is a simple set up for Cassandra with two nodes in a cluster.
 
 # Test performance
 
-WARNING: You normally don't want to launch this in the same pod as the Cassandra server (the below command does that). But if you want to just test it quick you can do this:
+Cassandra has a build in stress test tool that is awesome.
+
+## Demo mode
+
+You can easily run the benchmarks inside the same pod as one of the server processes. You normally don't want to do this though as it affects the server process and is constrained to the same cpu and memory as the server.
 
     oc exec -ti $(oc get -o jsonpath='{@.items[0].metadata.name}' pods) -- bash -c 'cassandra-stress write -node $POD_IP' | tee stress.txt
 
+## Stress testing pod
 To launch it in a different pod:
 
-    oc run cassandra-stress -i --tty --restart='Never' --image=anderssv/openshift-cassandra /bin/bash
+    oc run cassandra-stress -i --tty --attach=false --image=anderssv/openshift-cassandra /bin/bash
 
-Then run:
+Running the test:
     
-    cassandra-stress write -rate threads\>\=500 -node <pod_ip>
+    oc exec \
+        -t $(oc get -l 'run=cassandra-stress' -o jsonpath='{@.items[0].metadata.name}' pods) \
+        -- cassandra-stress write -rate threads\>\=500 \
+            -node $(oc get -o jsonpath='{@.items[0].status.podIP}' pods)
 
 Make sure to check which node the cassandra-stress pod is running on, and that it is different from the nodes you are testing. :)
-
-If you are disconnected from the pod run the following:
-
-    oc attach -ti cassandra-stress
 
 # Resources
 
