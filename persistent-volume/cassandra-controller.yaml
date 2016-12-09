@@ -79,7 +79,7 @@ items:
                 valueFrom:
                   fieldRef:
                     fieldPath: status.podIP
-            image: anderssv/openshift-cassandra
+            image: hc0siemens/openshift-cassandra
             name: cassandra-1
             ports:
               - containerPort: 9042
@@ -137,7 +137,7 @@ items:
                 valueFrom:
                   fieldRef:
                     fieldPath: status.podIP
-            image: anderssv/openshift-cassandra
+            image: hc0siemens/openshift-cassandra
             name: cassandra-2
             ports:
               - containerPort: 9042
@@ -195,7 +195,7 @@ items:
                 valueFrom:
                   fieldRef:
                     fieldPath: status.podIP
-            image: anderssv/openshift-cassandra
+            image: hc0siemens/openshift-cassandra
             name: cassandra-3
             ports:
               - containerPort: 9042
