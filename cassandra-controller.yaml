@@ -36,7 +36,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
-          image: anderssv/openshift-cassandra
+          image: hc0siemens/openshift-cassandra
           name: cassandra
           ports:
             - containerPort: 9042
