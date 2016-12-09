@@ -14,7 +14,7 @@
 
 # build the cassandra image.
 
-VERSION=v9
+VERSION=v11
 
 all: build
 
@@ -24,9 +24,9 @@ kubernetes-cassandra.jar: ../java/* ../java/src/main/java/io/k8s/cassandra/*.jav
 	cd ../java && mvn clean
 
 build: kubernetes-cassandra.jar
-	docker build -t gcr.io/google_samples/cassandra:${VERSION} .
+	docker build -t docker pull hc0siemens/openshift-cassandra:${VERSION} .
 
 push: build
-	gcloud docker push gcr.io/google_samples/cassandra:${VERSION}
+	gcloud docker push docker pull hc0siemens/openshift-cassandra:${VERSION}
 
 .PHONY: all build push
