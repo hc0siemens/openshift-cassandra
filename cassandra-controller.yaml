@@ -22,12 +22,14 @@ spec:
             - /run.sh
           resources:
             limits:
-              cpu: 0.1
+              cpu: 0.5
           env:
             - name: MAX_HEAP_SIZE
               value: 512M
             - name: HEAP_NEWSIZE
               value: 100M
+            - name: CASSANDRA_SEED_PROVIDER
+              value: "io.k8s.cassandra.KubernetesSeedProvider"
             - name: POD_NAMESPACE
               valueFrom:
                 fieldRef:
@@ -36,16 +38,20 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
-          image: hc0siemens/openshift-cassandra
+          image: hc0siemens/openshift-cassandra:v11
           name: cassandra
           ports:
+            - containerPort: 7000
+              name: intra-node
+            - containerPort: 7001
+              name: tls-intra-node
+            - containerPort: 7199
+              name: jmx
             - containerPort: 9042
               name: cql
-            - containerPort: 9160
-              name: thrift
           volumeMounts:
             - mountPath: /cassandra_data
-              name: cassandra-data
+              name: data
       volumes:
-        - name: cassandra-data
+        - name: data
           emptyDir: {}
