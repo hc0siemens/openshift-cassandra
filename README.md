@@ -35,7 +35,7 @@ This example also uses some of the core components of Kubernetes:
 
 ## Prerequisites
 
-If using OpenShift, don't bother with Stateful Sets (just yet).
+If using **OpenShift**, don't bother with Stateful Sets (just yet).
 Also, for the Java sources, please find them at kubernetes' GitHub repo.
 
 This example assumes that you have a Kubernetes version >=1.2 cluster installed and running,
